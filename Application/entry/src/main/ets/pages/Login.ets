@@ -3,17 +3,29 @@ import Prompt from '@system.prompt'
 import cloud from '@hw-agconnect/cloud'
 import { VerifyCodeAction } from '@hw-agconnect/auth-ohos'
 import hilog from '@ohos.hilog'
-import { CredentialInfo } from '@hw-agconnect/hmcore/src/main/ets/credential/CredentialInfo'
 
-@Entry
 @Component
-struct Login {
+export struct Login {
   @State countdown: number = 60
   @State phoneNumber: string = ''
   @State verifyCode: string = ''
   intervalId: number = 0
   @State verifyCodeButtonTest: string = '获取验证码'
   @State verifyCodeButtonEnable: boolean = true
+
+  async aboutToAppear() {
+    try {
+      const user = await cloud.auth().getCurrentUser()
+      if (user) {
+        AppStorage.SetOrCreate('user', user)
+        router.replaceUrl({
+          url: 'pages/Index'
+        })
+      }
+    } catch (e) {
+      hilog.error(0, 'aboutToAppear', JSON.stringify(e))
+    }
+  }
 
   build() {
     Column({ space: 15 }) {
@@ -27,11 +39,7 @@ struct Login {
       }).width('90%').type(InputType.Number).maxLength(11)
         .onChange((val: string) => {
           this.phoneNumber = val
-          //AppStorage.SetOrCreate('account', val)
         })
-      // TextInput({
-      //   placeholder: '请输入密码'
-      // }).width(300).onChange((val: string) => this.password = val).type(InputType.Password)
 
       Row({space: 10}) {
         TextInput({
@@ -73,9 +81,9 @@ struct Login {
             }
 
         })
-      }.width('90%')
+      }.width('90%').margin({ top: 10 })
 
-      Button('登录').width("90%").backgroundColor('#0aa671')
+      Button('登录').width("90%").backgroundColor('#0aa671').margin({ top: 20 })
         .onClick(async () => {
           if (this.phoneNumber.length !==  11 || this.verifyCode.length !== 6) {
             Prompt.showToast({ message: '请输入正确的手机号和验证码' })
@@ -86,6 +94,7 @@ struct Login {
             credentialInfo: {kind: 'phone', phoneNumber: this.phoneNumber, countryCode: '86', verifyCode: this.verifyCode}
           })
           const user = result.getUser()
+          AppStorage.SetOrCreate('user', user)
           hilog.info(0, 'signIn', 'success')
           router.replaceUrl({
             url: 'pages/Index'
@@ -96,18 +105,18 @@ struct Login {
         }
 
       })
-      Row() {
-        Text('没有账户？')
-        Text('去注册').fontWeight(FontWeight.Bold).fontColor('#0aa671')
-          .onClick(() => {
-            router.pushUrl({
-              url: 'pages/Register'
-            })
-          })
-      }
+      // Row() {
+      //   Text('没有账户？')
+      //   Text('去注册').fontWeight(FontWeight.Bold).fontColor('#0aa671')
+      //     .onClick(() => {
+      //       router.pushUrl({
+      //         url: 'pages/Register'
+      //       })
+      //     })
+      // }
 
       LoadingProgress()
-        .color('#0aa671').width(50).height(50)
+        .color('#0aa671').width(50).height(50).margin({ top: 20 })
     }
     .width('100%')
     .height('100%')

@@ -95,7 +95,18 @@ export struct UserIndex {
           Column({space: 4}) {
             Image($r('app.media.logo')).width(30)
             Text('个人信息')
-          }.width('25%')
+          }.width('25%').onClick(() => {
+            router.pushUrl(
+              {
+                url: 'pages/UserInfo',
+              },
+              err => {
+                if (err) {
+                  console.log(`路由失败，errCode:${err.code},errMsg:${err.message}`)
+                }
+              }
+            )
+          })
 
           ForEach(this.items, (item: panelData) => {
             Column({ space: 4 }) {
