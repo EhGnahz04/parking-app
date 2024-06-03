@@ -4,7 +4,6 @@
     "pages/Record",
     "pages/Register",
     "pages/Service",
-    "pages/UserInfo",
-    "pages/DBdemo"
+    "pages/UserInfo"
   ]
 }

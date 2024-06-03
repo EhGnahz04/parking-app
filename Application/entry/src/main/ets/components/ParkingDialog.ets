@@ -19,13 +19,12 @@ export struct ParkingDialog {
   async aboutToAppear(){
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
     this.parkingList = await this.database.collection(t_parking).query().equalTo("license", this.license).isNotNull("parkTime").equalTo("state", 0).orderByAsc("id").get()
-    //this.parkingList = await this.database.collection(t_parking).query().orderByAsc("id").get()
     this.fee = await this.parkingList.reduce((total, parking) => total + parking.getFee(), 0)
   }
 
   build(){
     Column() {
-      Text('待缴费用1')
+      Text('待缴费用')
         .fontSize(20)
         .fontWeight('bold')
         .margin({ top: 10 })
@@ -43,7 +42,7 @@ export struct ParkingDialog {
           })
       }
       .width('100%')
-      .height('30%')
+      .height('15%')
 
       Text(`总金额: ${this.fee} 元`)
         .fontSize(20)
@@ -59,6 +58,22 @@ export struct ParkingDialog {
             parking.setState(1)
             await this.database.collection(t_parking).upsert(parking)
           }
+
+          const user = await cloud.auth().getCurrentUser()
+          if (user) {
+            const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_record })
+            const uid = user.getUid()
+            const records = await database.collection(t_record).query().get()
+            const record = new t_record()
+            record.setId(records.length + 1)
+            record.setU_id(uid)
+            record.setLicense(this.license)
+            record.setFee(this.fee)
+            record.setTime(new Date())
+            record.setState(1)
+            await database.collection(t_record).upsert(record)
+          }
+
           Prompt.showToast({ message: '支付成功' })
           this.controller.close()
         })

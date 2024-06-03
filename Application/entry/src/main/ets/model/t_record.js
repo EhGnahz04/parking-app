@@ -8,9 +8,9 @@ class t_record {
         this.id = undefined;
         this.u_id = undefined;
         this.license = undefined;
-        this.time = undefined;
         this.fee = undefined;
         this.state = undefined;
+        this.time = undefined;
     }
 
     setId(id) {
@@ -37,14 +37,6 @@ class t_record {
         return this.license;
     }
 
-    setTime(time) {
-        this.time = time;
-    }
-
-    getTime() {
-        return this.time;
-    }
-
     setFee(fee) {
         this.fee = fee;
     }
@@ -59,6 +51,14 @@ class t_record {
 
     getState() {
         return this.state;
+    }
+
+    setTime(time) {
+        this.time = time;
+    }
+
+    getTime() {
+        return this.time;
     }
 }
 

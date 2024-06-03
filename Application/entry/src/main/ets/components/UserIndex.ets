@@ -10,7 +10,6 @@ export struct UserIndex {
     new panelData('平台资质', $r('app.media.logo')),
     new panelData('我要合作', $r('app.media.logo')),
     new panelData('消息通知', $r('app.media.logo')),
-    new panelData('个人信息', $r('app.media.logo')),
     new panelData('规则中心', $r('app.media.logo')),
   ]
   @State balance: number = 0

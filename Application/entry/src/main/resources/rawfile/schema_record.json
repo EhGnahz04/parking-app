@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 13,
   "permissions": [
     {
       "permissions": [
@@ -74,14 +74,6 @@
         },
         {
           "isNeedEncrypt": false,
-          "fieldName": "time",
-          "notNull": false,
-          "isSensitive": false,
-          "belongPrimaryKey": false,
-          "fieldType": "Date"
-        },
-        {
-          "isNeedEncrypt": false,
           "fieldName": "fee",
           "notNull": false,
           "isSensitive": false,
@@ -95,6 +87,14 @@
           "isSensitive": false,
           "belongPrimaryKey": false,
           "fieldType": "Integer"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "time",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Date"
         }
       ]
     }
