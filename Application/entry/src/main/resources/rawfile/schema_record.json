@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 4,
+  "permissions": [
+    {
+      "permissions": [
+        {
+          "role": "World",
+          "rights": []
+        },
+        {
+          "role": "Authenticated",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Creator",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Administrator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        }
+      ],
+      "objectTypeName": "t_record"
+    }
+  ],
+  "objectTypes": [
+    {
+      "indexes": [
+        {
+          "indexName": "id_index",
+          "indexList": [
+            {
+              "fieldName": "id",
+              "sortType": "ASC"
+            }
+          ]
+        }
+      ],
+      "objectTypeName": "t_record",
+      "fields": [
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "id",
+          "notNull": true,
+          "isSensitive": false,
+          "belongPrimaryKey": true,
+          "fieldType": "Integer"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "u_id",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "license",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "time",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Date"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "fee",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Double"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "state",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
+        }
+      ]
+    }
+  ]
+}

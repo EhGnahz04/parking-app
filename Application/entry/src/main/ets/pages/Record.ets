@@ -1,59 +1,33 @@
+// @ts-nocheck
 import dayjs from 'dayjs'
 import { Header } from '../components/CommonComponent'
+import cloud, { Database } from '@hw-agconnect/cloud'
+import schema from '../../resources/rawfile/schema_record.json'
+import { t_record } from '../model/t_record'
 
-class cord {
-  date: Date
-  license: string
-  fee: number
-  status: number
-
-  constructor(date: Date, license: string, fee: number, status: number = 0) {
-    this.date = date
-    this.license = license
-    this.fee = fee
-    this.status = status
-  }
-}
-
-@Builder function CordCard(cord: cord) {
+@Builder function CordCard(cord: t_record) {
   Column() {
     Row() {
-      Column() {
-         if (cord.status == 1) {
-           Text(dayjs(cord.date).format('YYYY-MM-DD HH:mm:ss'))
-             .fontColor('#CCC')
-             .decoration({ type: TextDecorationType.LineThrough })
-         } else {
-           Text(dayjs(cord.date).format('YYYY-MM-DD HH:mm:ss'))
-         }
+      if (cord.getState() == 1) {
+        Text(dayjs(cord.getTime()).format('YYYY-MM-DD HH:mm:ss')).fontColor('#008000').width(170)
+        Text(cord.getLicense()).fontColor('#008000').width(95)
+        Text(cord.getFee().toString()).fontColor('#008000').width(30)
+        Text('已缴费').fontColor('#008000')
+      } else if (cord.getState() == 0) {
+        Text(dayjs(cord.getTime()).format('YYYY-MM-DD HH:mm:ss')).fontColor('#FF0000').width(170)
+        Text(cord.getLicense()).fontColor('#FF0000').width(95)
+        Text(cord.getFee().toString()).fontColor('#FF0000').width(30)
+        Text('未缴费').fontColor('#FF0000')
+      } else if (cord.getState() == 2) {
+        Text(dayjs(cord.getTime()).format('YYYY-MM-DD HH:mm:ss')).width(170).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
+        Text(cord.getLicense()).width(95).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
+        Text(cord.getFee().toString()).width(30).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
+        Text('已取消').fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
       }
-      .width(200)
-
-      Column() {
-        if (cord.status == 1) {
-          Text(cord.license)
-            .fontColor('#CCC')
-            .decoration({ type: TextDecorationType.LineThrough })
-        } else {
-          Text(cord.license)
-        }
-      }
-      .width(100)
-
-      Column() {
-        if (cord.status == 1) {
-          Text(cord.fee.toString())
-            .fontColor('#CCC')
-            .decoration({ type: TextDecorationType.LineThrough })
-        } else {
-          Text(cord.fee.toString())
-        }
-
-      }
-      .width(50)
     }
     .height(50)
     .width('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
 
@@ -61,33 +35,25 @@ class cord {
 @Entry
 @Component
 struct record {
-  private cords: cord[] = [
-    new cord(new Date(2021, 1, 1), "京ABC123", 1),
-    new cord(new Date(2021, 1, 2), "京ABC123", 2),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30, 1),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30),
-    new cord(new Date(2021, 1, 3), "京ABC1234", 30)
-  ]
+  @State recordList: t_record[] = []
+  private database: Database = null
+
+  async aboutToAppear() {
+    const user = await cloud.auth().getCurrentUser()
+    const uid = user.getUid()
+    this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
+    this.recordList = await this.database.collection(t_record).query().equalTo('u_id', uid).orderByAsc("id").get()
+  }
 
   build() {
-    Column({ space: 8 }) {
+    Column() {
       Header({ title: '缴费记录' })
         .margin({ top: 10 })
 
       List({ space: 10 }) {
         ForEach(
-          this.cords,
-          (cord: cord) => {
+          this.recordList,
+          (cord: t_record) => {
             ListItem() {
               CordCard(cord)
             }

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 11,
+  "permissions": [
+    {
+      "permissions": [
+        {
+          "role": "World",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Authenticated",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Creator",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Administrator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        }
+      ],
+      "objectTypeName": "t_parking"
+    }
+  ],
+  "objectTypes": [
+    {
+      "indexes": [
+        {
+          "indexName": "id_index",
+          "indexList": [
+            {
+              "fieldName": "id",
+              "sortType": "ASC"
+            }
+          ]
+        }
+      ],
+      "objectTypeName": "t_parking",
+      "fields": [
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "id",
+          "notNull": true,
+          "isSensitive": false,
+          "belongPrimaryKey": true,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "license",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "beginTime",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Date"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "endTime",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Date"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "state",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "parkTime",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "fee",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Double"
+        }
+      ]
+    }
+  ]
+}

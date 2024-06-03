@@ -1,11 +1,18 @@
 import { ProvinceKeyboard } from './LicenseKeyboard'
 import { Keyboard } from './LicenseKeyboard'
+import { ParkingDialog } from './ParkingDialog'
 import cloud from '@hw-agconnect/cloud'
 
 @Component
 export struct ParkingFee {
   @State license: string = ''
   @State status: number = 1
+
+  private dialogController: CustomDialogController = new CustomDialogController({
+    builder: ParkingDialog({license: this.license}),
+    offset: { dx: 0, dy: -20 },
+    alignment: DialogAlignment.Bottom,
+  })
 
   build() {
     Column() {
@@ -52,6 +59,9 @@ export struct ParkingFee {
       Row() {
         Button('清空').onClick(() => this.license = '')
         Button('确认')
+          .onClick(() => {
+            this.dialogController.open()
+          })
           // .onClick(async() => {
           //   const result = await cloud.callFunction({
           //       name: 'hello',

@@ -12,9 +12,8 @@ struct Index {
 
   async aboutToAppear() {
     try {
-      const user = await cloud.auth().getCurrentUser()
+      let user = AppStorage.Get('user')
       if (user) {
-        AppStorage.SetOrCreate('user', user)
         this.isLogin = true
       }
     } catch (e) {

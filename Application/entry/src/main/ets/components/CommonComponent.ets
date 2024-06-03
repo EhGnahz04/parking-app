@@ -17,7 +17,7 @@ export struct Header {
       Text(this.title)
         .fontSize(30)
         .fontWeight(FontWeight.Bold)
-        .margin({ bottom: 10, left: 73, top: 10 })
+        .margin({ bottom: 10, left: '33%', top: 10 })
     }
     .width('100%')
   }
