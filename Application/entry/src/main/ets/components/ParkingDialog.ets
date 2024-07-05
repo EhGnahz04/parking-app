@@ -9,6 +9,7 @@ import { t_record } from '../model/t_record'
 import { t_in } from '../model/t_in'
 import Prompt from '@system.prompt'
 import http from '@ohos.net.http'
+import {initDB} from '../functions/InitDB'
 
 @CustomDialog
 @Preview
@@ -18,38 +19,13 @@ export struct ParkingDialog {
   @Prop license: string
   @State fee: number = 0
   @State parkingList: t_parking[] = []
-  @State id: number = 0
 
   async aboutToAppear(){
-    this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
-    this.parkingList = await this.database.collection(t_parking).query().equalTo("license", this.license).isNotNull("parkTime").equalTo("state", 0).orderByAsc("id").get()
-    this.fee = await this.parkingList.reduce((total, parking) => total + parking.getFee(), 0)
+    initDB()
 
-    let httpRequest = http.createHttp()
-    let url = 'https://parking-85f1.obs.cn-southwest-2.myhuaweicloud.com/in.txt'
-    httpRequest.request(url, {
-      method: http.RequestMethod.GET,
-    }, (err, data) => {
-      if (!err) {
-        const lines = data.result.toString().split('\n');
-        const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_in });
-        for (const line of lines) {
-          const [license, time, lot_id] = line.split(' ')
-          this.id +=1
-          const inRecord = new t_in()
-          inRecord.setId(this.id)
-          inRecord.setLicense(license)
-          inRecord.setTime(new Date(time))
-          inRecord.setLot_id(parseInt(lot_id))
-          database.collection(t_in).upsert(inRecord)
-        }
-      } else {
-        this.message = "Failed to load file";
-        prompt.showToast({
-          message: "Error fetching file: " + err,
-        });
-      }
-    });
+    this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
+    this.parkingList = await this.database.collection(t_parking).query().equalTo("license", this.license).isNotNull("parkTime").notEqualTo("state", 1).orderByAsc("id").get()
+    this.fee = await this.parkingList.reduce((total, parking) => total + parking.getFee(), 0)
   }
 
   build(){

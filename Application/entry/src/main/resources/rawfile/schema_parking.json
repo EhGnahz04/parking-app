@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 11,
+  "schemaVersion": 17,
   "permissions": [
     {
       "permissions": [
@@ -106,6 +106,14 @@
           "isSensitive": false,
           "belongPrimaryKey": false,
           "fieldType": "Double"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "lot_id",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
         }
       ]
     }

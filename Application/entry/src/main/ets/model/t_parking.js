@@ -12,6 +12,7 @@ class t_parking {
         this.state = undefined;
         this.parkTime = undefined;
         this.fee = undefined;
+        this.lot_id = undefined;
     }
 
     setId(id) {
@@ -68,6 +69,14 @@ class t_parking {
 
     getFee() {
         return this.fee;
+    }
+
+    setLot_id(lot_id) {
+        this.lot_id = lot_id;
+    }
+
+    getLot_id() {
+        return this.lot_id;
     }
 }
 
