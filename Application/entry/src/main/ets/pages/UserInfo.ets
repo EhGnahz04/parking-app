@@ -47,7 +47,7 @@ struct UserInfo {
 
       TextInput({placeholder: '请输入昵称', text: this.displayName}).width('80%').onChange((text) => {
         this.displayName = text
-      })
+      }).margin({top: 20, bottom: 20})
 
       Row() {
         Button('取消')

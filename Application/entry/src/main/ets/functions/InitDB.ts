@@ -1,5 +1,5 @@
 // @ts-nocheck
-import cloud, { Database } from '@hw-agconnect/cloud'
+import cloud from '@hw-agconnect/cloud'
 import schema_in from '../../resources/rawfile/schema_in.json'
 import schema_out from '../../resources/rawfile/schema_out.json'
 import schema_parking from '../../resources/rawfile/schema_parking.json'
@@ -65,18 +65,6 @@ export async function initDB() {
 
   const inRecords = await database_in.collection(t_in).query().get()
   const outRecords = await database_out.collection(t_out).query().get()
-
-  // for (const inRecord of inRecords) {
-  //   const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_parking })
-  //   const parkingRecord = new t_parking()
-  //   parkingRecord.setId(inRecord.getId().toString())
-  //   parkingRecord.setLicense(inRecord.getLicense())
-  //   parkingRecord.setBeginTime(inRecord.getTime())
-  //   //parkingRecord.setEndTime(outRecords[inRecord.getId()-1].getTime())
-  //   parkingRecord.setLot_id(inRecord.getLot_id())
-  //   parkingRecord.setState(0)
-  //   database.collection(t_parking).upsert(parkingRecord)
-  // }
 
   for (const inRecord of inRecords) {
     const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_parking })

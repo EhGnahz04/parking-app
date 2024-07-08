@@ -11,6 +11,8 @@ class t_record {
         this.fee = undefined;
         this.state = undefined;
         this.time = undefined;
+        this.u_phone = undefined;
+        this.lot_id = undefined;
     }
 
     setId(id) {
@@ -59,6 +61,22 @@ class t_record {
 
     getTime() {
         return this.time;
+    }
+
+    setU_phone(u_phone) {
+        this.u_phone = u_phone;
+    }
+
+    getU_phone() {
+        return this.u_phone;
+    }
+
+    setLot_id(lot_id) {
+        this.lot_id = lot_id;
+    }
+
+    getLot_id() {
+        return this.lot_id;
     }
 }
 

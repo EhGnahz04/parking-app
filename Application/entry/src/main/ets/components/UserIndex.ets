@@ -1,10 +1,12 @@
-import cloud from '@hw-agconnect/cloud'
+import cloud, {AuthUser} from '@hw-agconnect/cloud'
 import router from '@ohos.router'
 import hilog from '@ohos.hilog'
 
+@Preview
 @Component
 export struct UserIndex {
   @State account: string = AppStorage.Get('account')
+  @StorageLink('user') user: AuthUser = null
   private items: Array<panelData> = [
     new panelData('用户协议', $r('app.media.logo')),
     new panelData('平台资质', $r('app.media.logo')),
@@ -13,6 +15,7 @@ export struct UserIndex {
     new panelData('规则中心', $r('app.media.logo')),
   ]
   @State balance: number = 0
+  @State photoUrl: string = ''
 
   //局部公共样式函数
   @Styles userPageSty(){
@@ -20,6 +23,10 @@ export struct UserIndex {
     .padding(10)
     .borderRadius(10)
     .backgroundColor('#FFF')
+  }
+
+  aboutToAppear(){
+    this.photoUrl = this.user.getPhotoUrl()
   }
 
   build() {
@@ -30,7 +37,7 @@ export struct UserIndex {
           .fontColor(Color.White)
           .fontSize(20)
           .margin({ top: 40 })
-        Image($r('app.media.logo')).width(60).borderRadius(50)
+        Image(this.photoUrl?this.photoUrl:$r('app.media.logo')).width(60).borderRadius(50).margin(20)
         Text(this.account).fontColor(Color.White)
       }
       .width('100%')
@@ -98,6 +105,22 @@ export struct UserIndex {
             router.pushUrl(
               {
                 url: 'pages/UserInfo',
+              },
+              err => {
+                if (err) {
+                  console.log(`路由失败，errCode:${err.code},errMsg:${err.message}`)
+                }
+              }
+            )
+          })
+
+          Column({space: 4}) {
+            Image($r('app.media.logo')).width(30)
+            Text('订单管理')
+          }.width('25%').onClick(() => {
+            router.pushUrl(
+              {
+                url: 'pages/AdminRecord',
               },
               err => {
                 if (err) {

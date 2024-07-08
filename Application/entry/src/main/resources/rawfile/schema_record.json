@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 13,
+  "schemaVersion": 18,
   "permissions": [
     {
       "permissions": [
@@ -95,6 +95,22 @@
           "isSensitive": false,
           "belongPrimaryKey": false,
           "fieldType": "Date"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "u_phone",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "lot_id",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
         }
       ]
     }
