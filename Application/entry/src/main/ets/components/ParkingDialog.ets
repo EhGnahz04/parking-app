@@ -19,7 +19,6 @@ export struct ParkingDialog {
 
   async aboutToAppear(){
     initDB()
-
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
     this.parkingList = await this.database.collection(t_parking).query().equalTo("license", this.license).isNotNull("parkTime").notEqualTo("state", 1).orderByAsc("id").get()
     this.fee = await this.parkingList.reduce((total, parking) => total + parking.getFee(), 0)

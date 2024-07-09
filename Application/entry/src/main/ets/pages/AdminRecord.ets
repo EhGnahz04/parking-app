@@ -5,6 +5,7 @@ import cloud, { Database } from '@hw-agconnect/cloud'
 import schema from '../../resources/rawfile/schema_record.json'
 import { t_record } from '../model/t_record'
 import { RecordDialog } from '../components/RecordDialog'
+import Prompt from '@system.prompt'
 
 
 @Entry
@@ -74,10 +75,10 @@ struct AdminRecord {
                 .width('95%')
                 .justifyContent(FlexAlign.Center)
                 .borderRadius(30)
-                .onClick(() => {
+                .onClick(async() => {
                   this.record = cord
                   this.dialogController.open()
-                  this.database.collection(t_record).upsert(this.record)
+                  await this.database.collection(t_record).upsert(this.record)
                 })
               }
             }
