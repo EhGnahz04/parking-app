@@ -130,6 +130,22 @@ export struct UserIndex {
             )
           })
 
+          Column({space: 4}) {
+            Image($r('app.media.logo')).width(30)
+            Text('收件箱')
+          }.width('25%').onClick(() => {
+            router.pushUrl(
+              {
+                url: 'pages/MessageBox',
+              },
+              err => {
+                if (err) {
+                  console.log(`路由失败，errCode:${err.code},errMsg:${err.message}`)
+                }
+              }
+            )
+          })
+
           ForEach(this.items, (item: panelData) => {
             Column({ space: 4 }) {
               Image(item.image).width(30)

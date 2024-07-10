@@ -13,15 +13,15 @@ export struct RecordDialog {
   build() {
     Column(){
       Column() {
-        Text('订单详情').fontSize(20).fontWeight('bold').margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`ID: ${this.record.getId()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`用户ID: ${this.record.getU_id()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`车牌号: ${this.record.getLicense()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`费用: ${this.record.getFee()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`状态: ${this.record.getState()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`时间: ${dayjs(this.record.getTime()).format('YYYY-MM-DD HH:mm:ss')}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`用户电话: ${this.record.getU_phone()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
-        Text(`停车场ID: ${this.record.getLot_id()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Left)
+        Text('订单详情').fontSize(20).fontWeight('bold').margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`ID: ${this.record.getId()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`用户ID: ${this.record.getU_id()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`车牌号: ${this.record.getLicense()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`费用: ${this.record.getFee()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`状态: ${this.record.getState()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`时间: ${dayjs(this.record.getTime()).format('YYYY-MM-DD HH:mm:ss')}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`用户电话: ${this.record.getU_phone()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+        Text(`停车场ID: ${this.record.getLot_id()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
       }.padding(20).width('80%')
 
       Row() {

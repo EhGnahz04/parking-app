@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "permissions": [
     {
       "permissions": [
@@ -98,6 +98,14 @@
           "isSensitive": false,
           "belongPrimaryKey": false,
           "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "date",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Date"
         }
       ]
     }

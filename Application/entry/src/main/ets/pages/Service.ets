@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Header } from '../components/CommonComponent'
-import router from '@ohos.router';
+import router from '@ohos.router'
 import Prompt from '@system.prompt'
 import cloud, { Database } from '@hw-agconnect/cloud'
 import schema from '../../resources/rawfile/schema_message.json'
@@ -77,6 +77,7 @@ struct Service {
               message.setU_id(user.getUid())
               message.setU_phone(user.getPhone())
             }
+            message.setDate(new Date())
             await this.database.collection(t_message).upsert(message)
             Prompt.showToast({ message: '已收到您的消息，客服会尽快回复！'})
             router.back()

@@ -5,7 +5,6 @@ import cloud, { Database } from '@hw-agconnect/cloud'
 import schema from '../../resources/rawfile/schema_record.json'
 import { t_record } from '../model/t_record'
 import { RecordDialog } from '../components/RecordDialog'
-import Prompt from '@system.prompt'
 
 
 @Entry

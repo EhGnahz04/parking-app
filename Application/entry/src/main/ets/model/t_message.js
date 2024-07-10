@@ -11,6 +11,7 @@ class t_message {
         this.content = undefined;
         this.state = undefined;
         this.u_id = undefined;
+        this.date = undefined;
     }
 
     setId(id) {
@@ -59,6 +60,14 @@ class t_message {
 
     getU_id() {
         return this.u_id;
+    }
+
+    setDate(date) {
+        this.date = date;
+    }
+
+    getDate() {
+        return this.date;
     }
 }
 

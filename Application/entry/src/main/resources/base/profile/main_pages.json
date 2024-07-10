@@ -6,6 +6,7 @@
     "pages/Service",
     "pages/UserInfo",
     "pages/Test",
-    "pages/AdminRecord"
+    "pages/AdminRecord",
+    "pages/MessageBox"
   ]
 }
