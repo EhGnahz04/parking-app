@@ -30,6 +30,12 @@ struct AdminRecord {
     this.showRecordList = this.recordList
   }
 
+  async aboutToDisappear() {
+    for (const record of this.showRecordList) {
+      await this.database.collection(t_record).upsert(record)
+    }
+  }
+
   build() {
     Column() {
       Header({ title: '订单管理' })
@@ -77,7 +83,6 @@ struct AdminRecord {
                 .onClick(async() => {
                   this.record = cord
                   this.dialogController.open()
-                  await this.database.collection(t_record).upsert(this.record)
                 })
               }
             }
