@@ -18,10 +18,16 @@ export struct Login {
     try {
       const user = await cloud.auth().getCurrentUser()
       if (user) {
-        AppStorage.SetOrCreate('user', user)
-        router.replaceUrl({
-          url: 'pages/Index'
-        })
+        if (user.getUid() == '1463247718783690880') {
+          router.replaceUrl({
+            url: 'pages/AdminIndex'
+          })
+        } else {
+          AppStorage.SetOrCreate('user', user)
+          router.replaceUrl({
+            url: 'pages/Index'
+          })
+        }
       }
     } catch (e) {
       hilog.error(0, 'aboutToAppear', JSON.stringify(e))
@@ -97,9 +103,15 @@ export struct Login {
           const user = result.getUser()
           AppStorage.SetOrCreate('user', user)
           hilog.info(0, 'signIn', 'success')
-          router.replaceUrl({
-            url: 'pages/Index'
-          })
+          if (user.getUid() == '1463247718783690880') {
+            router.replaceUrl({
+              url: 'pages/AdminIndex'
+            })
+          } else {
+            router.replaceUrl({
+              url: 'pages/Index'
+            })
+          }
         } catch (e) {
           AlertDialog.show({title: '错误', message: '登录失败'})
           hilog.error(0, 'signIn', JSON.stringify(e))

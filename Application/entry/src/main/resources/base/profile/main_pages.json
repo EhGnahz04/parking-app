@@ -8,6 +8,8 @@
     "pages/MessageBox",
     "pages/MyCar",
     "pages/AddCar",
-    "pages/Login"
+    "pages/Login",
+    "pages/AdminIndex",
+    "pages/ParkSpace"
   ]
 }
