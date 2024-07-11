@@ -4,10 +4,10 @@
     "pages/Record",
     "pages/Service",
     "pages/UserInfo",
-    "pages/Test",
     "pages/AdminRecord",
     "pages/MessageBox",
     "pages/MyCar",
-    "pages/AddCar"
+    "pages/AddCar",
+    "pages/Login"
   ]
 }

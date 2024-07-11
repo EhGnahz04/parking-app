@@ -1,26 +1,10 @@
-import cloud from '@hw-agconnect/cloud'
-import router from '@ohos.router'
 import { ParkingFee } from '../components/ParkingIndex'
 import { UserIndex } from '../components/UserIndex'
-import { Login } from '../pages/Login'
 
 @Entry
 @Component
 struct Index {
   @State currentIndex: number = 0
-  isLogin: boolean = false
-
-  async aboutToAppear() {
-    try {
-      let user = AppStorage.Get('user')
-      if (user) {
-        this.isLogin = true
-      }
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
   @Builder TabBarBuilder(title: ResourceStr, image: ResourceStr, index: number) {
     Column({ space: 8 }) {
       Image(image)
@@ -44,11 +28,7 @@ struct Index {
       .tabBar(this.TabBarBuilder('停车缴费', $r('app.media.parking'), 0))
 
       TabContent() {
-        if (this.isLogin) {
           UserIndex()
-        } else {
-          Login()
-        }
       }
       .tabBar(this.TabBarBuilder('用户中心', $r('app.media.user'), 1))
     }

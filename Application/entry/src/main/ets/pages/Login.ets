@@ -4,6 +4,7 @@ import cloud from '@hw-agconnect/cloud'
 import { VerifyCodeAction } from '@hw-agconnect/auth-ohos'
 import hilog from '@ohos.hilog'
 
+@Entry
 @Component
 export struct Login {
   @State countdown: number = 60
