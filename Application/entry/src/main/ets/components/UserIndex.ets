@@ -11,7 +11,6 @@ export struct UserIndex {
     new panelData('用户协议', $r('app.media.logo')),
     new panelData('平台资质', $r('app.media.logo')),
     new panelData('我要合作', $r('app.media.logo')),
-    new panelData('消息通知', $r('app.media.logo')),
     new panelData('规则中心', $r('app.media.logo')),
   ]
   @State balance: number = 0
@@ -137,6 +136,22 @@ export struct UserIndex {
             router.pushUrl(
               {
                 url: 'pages/MessageBox',
+              },
+              err => {
+                if (err) {
+                  console.log(`路由失败，errCode:${err.code},errMsg:${err.message}`)
+                }
+              }
+            )
+          })
+
+          Column({space: 4}) {
+            Image($r('app.media.logo')).width(30)
+            Text('我的爱车')
+          }.width('25%').onClick(() => {
+            router.pushUrl(
+              {
+                url: 'pages/MyCar',
               },
               err => {
                 if (err) {

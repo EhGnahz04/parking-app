@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 23,
+  "permissions": [
+    {
+      "permissions": [
+        {
+          "role": "World",
+          "rights": [
+            "Read"
+          ]
+        },
+        {
+          "role": "Authenticated",
+          "rights": [
+            "Read",
+            "Upsert"
+          ]
+        },
+        {
+          "role": "Creator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        },
+        {
+          "role": "Administrator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        }
+      ],
+      "objectTypeName": "t_license"
+    }
+  ],
+  "objectTypes": [
+    {
+      "indexes": [],
+      "objectTypeName": "t_license",
+      "fields": [
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "u_phone",
+          "notNull": false,
+          "isSensitive": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "license",
+          "notNull": true,
+          "isSensitive": false,
+          "belongPrimaryKey": true,
+          "fieldType": "String"
+        }
+      ]
+    }
+  ]
+}

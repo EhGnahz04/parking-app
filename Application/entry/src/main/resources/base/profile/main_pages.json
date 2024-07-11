@@ -7,6 +7,8 @@
     "pages/UserInfo",
     "pages/Test",
     "pages/AdminRecord",
-    "pages/MessageBox"
+    "pages/MessageBox",
+    "pages/MyCar",
+    "pages/AddCar"
   ]
 }

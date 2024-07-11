@@ -16,7 +16,6 @@ export struct ParkingFee {
 
   build() {
     Column() {
-
       if (this.status == 1) {
         Row() {
           Text('请输入车牌号缴费').fontSize(20).fontWeight('bold')
