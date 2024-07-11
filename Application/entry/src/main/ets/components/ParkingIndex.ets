@@ -1,100 +1,65 @@
-import { ProvinceKeyboard } from './LicenseKeyboard'
-import { Keyboard } from './LicenseKeyboard'
+// @ts-nocheck
 import { ParkingDialog } from './ParkingDialog'
-import cloud from '@hw-agconnect/cloud'
+import cloud, { Database } from '@hw-agconnect/cloud'
+import schema from '../../resources/rawfile/schema_license.json'
+import { t_license } from '../model/t_license'
+import router from '@ohos.router'
 
 @Component
 export struct ParkingFee {
-  @State license: string = ''
-  @State status: number = 1
+  @State license : string = ''
+  @State licenseList : t_license[] = []
+  private database: Database = null
+  private phone: string = ''
 
   private dialogController: CustomDialogController = new CustomDialogController({
-    builder: ParkingDialog({license: this.license}),
+    builder: ParkingDialog({ licenseList: $licenseList }),
     offset: { dx: 0, dy: -20 },
     alignment: DialogAlignment.Bottom,
   })
 
+  async aboutToAppear() {
+    const user = await cloud.auth().getCurrentUser()
+    this.phone = user.getPhone()
+    this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
+    this.licenseList = await this.database.collection(t_license).query().equalTo('u_phone', this.phone).get()
+  }
+
   build() {
     Column() {
-      if (this.status == 1) {
-        Row() {
-          Text('请输入车牌号缴费').fontSize(20).fontWeight('bold')
-          Blank()
-          Text('切换其他车牌').fontSize(20).fontColor('#007AFF').onClick(() => this.status = 0)
-        }
-        .width('90%')
-        .height(30)
-        .justifyContent(FlexAlign.Start)
-
-        this.showLicense()
-
-        if (this.license.length == 0) {
-          ProvinceKeyboard({ province: $license })
-        } else {
-          Keyboard({ license: $license })
-        }
-      } else {
-        Row() {
-          Text('请输入车牌号缴费').fontSize(20).fontWeight('bold')
-          Blank()
-          Text('切换内地车牌').fontSize(20).fontColor('#007AFF').onClick(() => this.status = 1)
-        }
-        .width('90%')
-        .height(30)
-        .justifyContent(FlexAlign.Start)
-
-        Blank().height(60)
-
-        TextInput()
-          .fontSize(20)
-          .width('90%')
-          .height(40)
-          .margin({ top: 10 })
-          .onChange((value) => this.license = value)
-
-        Blank().height(270)
-      }
-
-      Row() {
-        Button('清空').onClick(() => this.license = '')
-        Button('确认')
+      Text('我的车辆').fontSize(30).margin({ top: 10, bottom: 30 }).fontWeight(FontWeight.Bold)
+      if (this.licenseList.length === 0) {
+        Text('暂无车辆，请点此添加').fontSize(20).fontWeight(FontWeight.Bold).fontColor('#0aa671').margin({ top: 60 })
           .onClick(() => {
-            this.dialogController.open()
+            router.pushUrl({ url : 'pages/AddCar' })
           })
-          // .onClick(async() => {
-          //   const result = await cloud.callFunction({
-          //       name: 'hello',
-          //       version: '$latest',
-          //       params: {}
-          //     })
-          //   this.hello = result.getValue().desc
-          // })
+      } else {
+        List({ space: 10 }) {
+          ForEach(
+            this.licenseList,
+            (item: t_license) => {
+              ListItem() {
+                Row() {
+                  Text(item.getLicense()).fontSize(20) }
+                    .width('95%')
+                    .padding(20)
+                    .backgroundColor(Color.White)
+                    .borderRadius(15)
+                    .shadow({ radius: 6, color: '#1F000000', offsetX: 2, offsetY: 4 })
+                    .justifyContent(FlexAlign.SpaceBetween)
+              }
+            }
+          )
+        }
+        .width('100%')
+        .height(200)
+        .alignListItem(ListItemAlign.Center)
+        .scrollBar(BarState.Auto)
       }
-      .width('90%')
-      .justifyContent(FlexAlign.SpaceAround)
-      .margin({ top: 20 })
-
+      Button('查询').onClick(() => {
+        this.dialogController.open()
+      }).size({ width: 200, height: 50 }).margin({ top: 30 })
     }
   }
 
-  @Builder showLicense() {
-    Grid() {
-      ForEach(this.license.split(''), char => {
-        GridItem() {
-          Text(char).fontSize(30).height(50)
-        }
-      })
-      ForEach(new Array(8 - this.license.length).fill(''), () => {
-        GridItem() {
-        }
-      })
-    }
-    .columnsTemplate('1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr')
-    .width('90%')
-    .height(80)
-    .columnsGap(8)
-    .rowsGap(8)
-    .padding(8)
-    .margin({ top: 10 })
-  }
 }

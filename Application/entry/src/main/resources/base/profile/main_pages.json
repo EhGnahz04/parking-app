@@ -2,7 +2,6 @@
   "src": [
     "pages/Index",
     "pages/Record",
-    "pages/Register",
     "pages/Service",
     "pages/UserInfo",
     "pages/Test",

@@ -105,15 +105,6 @@ export struct Login {
         }
 
       })
-      // Row() {
-      //   Text('没有账户？')
-      //   Text('去注册').fontWeight(FontWeight.Bold).fontColor('#0aa671')
-      //     .onClick(() => {
-      //       router.pushUrl({
-      //         url: 'pages/Register'
-      //       })
-      //     })
-      // }
 
       LoadingProgress()
         .color('#0aa671').width(50).height(50).margin({ top: 20 })

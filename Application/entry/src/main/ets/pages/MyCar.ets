@@ -19,7 +19,6 @@ struct MyCar {
   @State licenseList : t_license[] = []
   private database: Database = null
   private phone: string = ''
-  @State src: string = ''
 
   async aboutToAppear() {
     const user = await cloud.auth().getCurrentUser()
@@ -30,7 +29,20 @@ struct MyCar {
 
   build() {
     Column({ space: 10 }) {
-      Header({ title: '我的爱车' })
+      Row() {
+        Image($r('app.media.back'))
+          .width(30)
+          .margin({ left: 20 })
+          .onClick(() => {
+            router.replaceUrl({ url : 'pages/Index' })
+          })
+
+        Text('我的爱车')
+          .fontSize(30)
+          .fontWeight(FontWeight.Bold)
+          .margin({ bottom: 10, left: '33%', top: 10 })
+      }
+      .width('100%')
 
       Button('新增车辆')
         .width(200)
