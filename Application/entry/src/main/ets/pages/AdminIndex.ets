@@ -3,8 +3,6 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct AdminIndex {
-  @State message: string = 'Hello World'
-
   build() {
     Row() {
       Column({space: 4}) {
