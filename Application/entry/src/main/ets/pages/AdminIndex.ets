@@ -8,7 +8,7 @@ struct AdminIndex {
   build() {
     Row() {
       Column({space: 4}) {
-        Image($r('app.media.logo')).width(60)
+        Image($r('app.media.order_manage')).width(60)
         Text('订单管理')
       }.width('50%').onClick(() => {
         router.pushUrl(
@@ -24,7 +24,7 @@ struct AdminIndex {
       })
 
       Column({space: 4}) {
-        Image($r('app.media.logo')).width(60)
+        Image($r('app.media.box')).width(60)
         Text('收件箱')
       }.width('50%').onClick(() => {
         router.pushUrl(

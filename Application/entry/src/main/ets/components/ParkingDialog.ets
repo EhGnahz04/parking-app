@@ -18,8 +18,6 @@ export struct ParkingDialog {
 
   async aboutToAppear(){
     initDB()
-    initDB()
-    initDB()
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
     for (let i = 0; i < this.licenseList.length; i++) {
       const license = this.licenseList[i]

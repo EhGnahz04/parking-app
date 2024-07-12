@@ -8,10 +8,11 @@ export struct UserIndex {
   @State account: string = AppStorage.Get('account')
   @StorageLink('user') user: AuthUser = null
   private items: Array<panelData> = [
-    new panelData('用户协议', $r('app.media.logo')),
-    new panelData('平台资质', $r('app.media.logo')),
-    new panelData('我要合作', $r('app.media.logo')),
-    new panelData('规则中心', $r('app.media.logo')),
+    new panelData('用户协议', $r('app.media.doc')),
+    new panelData('平台资质', $r('app.media.platform')),
+    new panelData('我要合作', $r('app.media.cooperate')),
+    new panelData('规则中心', $r('app.media.rules')),
+    new panelData('关于我们', $r('app.media.about')),
   ]
   @State balance: number = 0
   @State photoUrl: string = ''
@@ -98,7 +99,7 @@ export struct UserIndex {
 
         Flex({ wrap: FlexWrap.Wrap, alignContent: FlexAlign.SpaceAround }) {
           Column({space: 4}) {
-            Image($r('app.media.logo')).width(30)
+            Image($r('app.media.personal_information')).width(30)
             Text('个人信息')
           }.width('25%').onClick(() => {
             router.pushUrl(
@@ -114,7 +115,7 @@ export struct UserIndex {
           })
 
           Column({space: 4}) {
-            Image($r('app.media.logo')).width(30)
+            Image($r('app.media.my_car')).width(30)
             Text('我的爱车')
           }.width('25%').onClick(() => {
             router.pushUrl(
@@ -130,7 +131,7 @@ export struct UserIndex {
           })
 
           Column({space: 4}) {
-            Image($r('app.media.logo')).width(30)
+            Image($r('app.media.parking')).width(30)
             Text('车位查看')
           }.width('25%').onClick(() => {
             router.pushUrl(

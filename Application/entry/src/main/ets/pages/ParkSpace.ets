@@ -2,9 +2,7 @@
 import { Header } from '../components/CommonComponent'
 import cloud from '@hw-agconnect/cloud'
 import schema_lot from '../../resources/rawfile/schema_lot.json'
-import schema_parking from '../../resources/rawfile/schema_parking.json'
 import { t_lot } from '../model/t_lot'
-import { t_parking } from '../model/t_parking'
 
 @Entry
 @Component
@@ -14,11 +12,6 @@ struct ParkSpace {
   async aboutToAppear() {
     const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_lot })
     this.lotList = await database.collection(t_lot).query().get()
-    // const database_p = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_parking })
-    // for (const lot of this.lotList) {
-    //   const parkingList = await database_p.collection(t_parking).query().equalTo('lot_id', lot.getId()).get()
-    //   lot.setCapacity(lot.getCapacity() - parkingList.length)
-    // }
   }
 
   build() {
