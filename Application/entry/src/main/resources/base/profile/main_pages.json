@@ -10,6 +10,7 @@
     "pages/AddCar",
     "pages/Login",
     "pages/AdminIndex",
-    "pages/ParkSpace"
+    "pages/ParkSpace",
+    "pages/BigScreen"
   ]
 }
