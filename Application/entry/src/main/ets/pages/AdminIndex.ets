@@ -1,4 +1,5 @@
 import router from '@ohos.router'
+import cloud from '@hw-agconnect/cloud'
 
 @Entry
 @Component
@@ -73,6 +74,24 @@ struct AdminIndex {
         })
 
       }.margin({ top: 20 })
+
+      Row() {
+        Text('退出登录').fontSize(20)
+      }
+      .height(60)
+      .justifyContent(FlexAlign.Center)
+      .width('95%')
+      .margin({ top: 30 })
+      .onClick(async () => {
+        try {
+          await cloud.auth().signOut()
+          router.replaceUrl({
+            url: 'pages/Login'
+          })
+        } catch (e) {
+          console.error(e)
+        }
+      })
     }.height('100%').justifyContent(FlexAlign.Center)
   }
 }
