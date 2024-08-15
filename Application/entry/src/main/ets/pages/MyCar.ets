@@ -16,7 +16,7 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct MyCar {
-  @State licenseList : t_license[] = []
+  @State licenseList: t_license[] = []
   private database: Database = null
   private phone: string = ''
 
@@ -24,7 +24,10 @@ struct MyCar {
     const user = await cloud.auth().getCurrentUser()
     this.phone = user.getPhone()
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
-    this.licenseList = await this.database.collection(t_license).query().equalTo('u_phone', this.phone).get()
+    this.licenseList = await this.database.collection(t_license)
+      .query()
+      .equalTo('u_phone', this.phone)
+      .get()
   }
 
   build() {
@@ -34,7 +37,7 @@ struct MyCar {
           .width(30)
           .margin({ left: 20 })
           .onClick(() => {
-            router.replaceUrl({ url : 'pages/Index' })
+            router.replaceUrl({ url: 'pages/Index' })
           })
 
         Text('我的爱车')
@@ -48,7 +51,7 @@ struct MyCar {
         .width(200)
         .margin({ top: 10 })
         .onClick(() => {
-          router.replaceUrl({ url : 'pages/AddCar' })
+          router.replaceUrl({ url: 'pages/AddCar' })
         })
 
       List({ space: 10 }) {
@@ -88,7 +91,7 @@ struct MyCar {
     .type(ButtonType.Circle)
     .backgroundColor(Color.Red)
     .margin(5)
-    .onClick(async() => {
+    .onClick(async () => {
       await this.database.collection(t_license).delete(this.licenseList[index])
       this.licenseList.splice(index, 1)
     })

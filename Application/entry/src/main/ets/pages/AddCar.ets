@@ -11,7 +11,7 @@ import Prompt from '@system.prompt'
 @Entry
 @Component
 struct AddCar {
-  @State license : string = ''
+  @State license: string = ''
   @State status: number = 1
 
   build() {
@@ -61,7 +61,7 @@ struct AddCar {
       Row() {
         Button('清空').onClick(() => this.license = '')
         Button('确认')
-          .onClick(async() => {
+          .onClick(async () => {
             const user = await cloud.auth().getCurrentUser()
             const phone = user.getPhone()
             const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
@@ -73,7 +73,7 @@ struct AddCar {
               await database.collection(t_license).upsert(license)
               Prompt.showToast({ message: '添加成功' })
             }
-            router.replaceUrl({url : 'pages/MyCar', params: {license: this.license}})
+            router.replaceUrl({ url: 'pages/MyCar', params: { license: this.license } })
           })
       }
       .width('90%')

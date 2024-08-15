@@ -9,7 +9,7 @@ export default class EntryAbility extends UIAbility {
   async onCreate() {
 
     let input = await this.context.resourceManager.getRawFileContent('agconnect-services.json')
-    let jsonString  = util.TextDecoder.create('utf-8', {
+    let jsonString = util.TextDecoder.create('utf-8', {
       ignoreBOM: true
     }).decodeWithStream(input, {
       stream: false

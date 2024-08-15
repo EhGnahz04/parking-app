@@ -1,6 +1,46 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.cer",
+          "storePassword": "0000001B6D5529F18BEBA825E1C7433C2ED705B4D733AB30C766B69F950C9B8EFE58E6B3364FCA869734AE",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BF421C27B10002EE8637A528A1657C14B3A8DA946CE32F217A713A0B79A900DDA15BC7FF329E74A",
+          "profile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p12"
+        }
+      },
+      {
+        "name": "1",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.cer",
+          "storePassword": "0000001BC383FEFDB2948BEEE9196D583233DB52FF96902A91E96CE66FF842F50CD263E6CC360C37567DA9",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B257992BADD05C646CCEA5E490B568F292ACBE0DC07FD374B4FDE670BB077F7A188C3B1FA8F6CCC",
+          "profile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p12"
+        }
+      },
+      {
+        "name": "lxd",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.cer",
+          "storePassword": "0000001B5308970D4A4411F483231F67F5CA36186F0A470BFF99FFAB9334230A93EDA4B2356ECEE62526D1",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B17D0AC9BA19633387D7A872FC41D3736E3FE17DF69F1BF95A1E0948983779A1E00AA2546E88E7B",
+          "profile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\zhang\\.ohos\\config\\auto_debug_Application_com.iot.smartparking_30086000723727348.p12"
+        }
+      }
+    ],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
     "products": [

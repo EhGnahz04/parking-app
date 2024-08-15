@@ -1,4 +1,4 @@
-import cloud, {AuthUser} from '@hw-agconnect/cloud'
+import cloud, { AuthUser } from '@hw-agconnect/cloud'
 import router from '@ohos.router'
 import hilog from '@ohos.hilog'
 
@@ -25,7 +25,7 @@ export struct UserIndex {
     .backgroundColor('#FFF')
   }
 
-  aboutToAppear(){
+  aboutToAppear() {
     this.photoUrl = this.user.getPhotoUrl()
   }
 
@@ -37,7 +37,7 @@ export struct UserIndex {
           .fontColor(Color.White)
           .fontSize(20)
           .margin({ top: 40 })
-        Image(this.photoUrl?this.photoUrl:$r('app.media.logo')).width(60).borderRadius(50).margin(20)
+        Image(this.photoUrl ? this.photoUrl : $r('app.media.logo')).width(60).borderRadius(50).margin(20)
         Text(this.account).fontColor(Color.White)
       }
       .width('100%')
@@ -98,7 +98,7 @@ export struct UserIndex {
         .userPageSty()
 
         Flex({ wrap: FlexWrap.Wrap, alignContent: FlexAlign.SpaceAround }) {
-          Column({space: 4}) {
+          Column({ space: 4 }) {
             Image($r('app.media.personal_information')).width(30)
             Text('个人信息')
           }.width('25%').onClick(() => {
@@ -114,7 +114,7 @@ export struct UserIndex {
             )
           })
 
-          Column({space: 4}) {
+          Column({ space: 4 }) {
             Image($r('app.media.my_car')).width(30)
             Text('我的爱车')
           }.width('25%').onClick(() => {
@@ -130,7 +130,7 @@ export struct UserIndex {
             )
           })
 
-          Column({space: 4}) {
+          Column({ space: 4 }) {
             Image($r('app.media.parking')).width(30)
             Text('车位查看')
           }.width('25%').onClick(() => {

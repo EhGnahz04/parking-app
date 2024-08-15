@@ -14,7 +14,7 @@ struct Service {
   @State id: number = ""
   private database: Database = null
 
-  async aboutToAppear(){
+  async aboutToAppear() {
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
     const messageList = await this.database.collection(t_message).query().get()
     this.id = messageList.length + 1
@@ -34,7 +34,7 @@ struct Service {
         })
 
       Row() {
-        Stack({ alignContent: Alignment.BottomEnd}) {
+        Stack({ alignContent: Alignment.BottomEnd }) {
           TextArea({ placeholder: "请输入内容：" })
             .width("100%")
             .height(300)
@@ -67,7 +67,7 @@ struct Service {
         Button('确认')
           .backgroundColor(0xffffff)
           .fontColor(Color.Red)
-          .onClick(async() => {
+          .onClick(async () => {
             const message = new t_message()
             const user = await cloud.auth().getCurrentUser()
             message.setId(this.id)
@@ -79,7 +79,7 @@ struct Service {
             }
             message.setDate(new Date())
             await this.database.collection(t_message).upsert(message)
-            Prompt.showToast({ message: '已收到您的消息，客服会尽快回复！'})
+            Prompt.showToast({ message: '已收到您的消息，客服会尽快回复！' })
             router.back()
           })
       }

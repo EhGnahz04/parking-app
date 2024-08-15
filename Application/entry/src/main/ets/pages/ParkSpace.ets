@@ -2,7 +2,9 @@
 import { Header } from '../components/CommonComponent'
 import cloud from '@hw-agconnect/cloud'
 import schema_lot from '../../resources/rawfile/schema_lot.json'
+import schema_in from '../../resources/rawfile/schema_lot.json'
 import { t_lot } from '../model/t_lot'
+import { t_in } from '../model/t_in'
 
 @Entry
 @Component
@@ -11,12 +13,15 @@ struct ParkSpace {
 
   async aboutToAppear() {
     const database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_lot })
+    const database2 = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema_in })
     this.lotList = await database.collection(t_lot).query().get()
+    const inList = await database2.collection(t_in).query().get()
+    this.lotList[0].setCapacity(this.lotList[0].getCapacity() - 1)
   }
 
   build() {
     Column() {
-      Header({title: '车位查看'})
+      Header({ title: '车位查看' })
 
       Row() {
         Text('停车场').width('33%').fontSize(25).fontWeight(FontWeight.Bold)

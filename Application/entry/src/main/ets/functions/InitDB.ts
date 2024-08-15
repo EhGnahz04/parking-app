@@ -22,7 +22,7 @@ export async function initDB() {
       const lines = data.result.toString().split('\n').slice(1)
       for (const line of lines) {
         const [license, date, time] = line.split(' ')
-        id +=1
+        id += 1
         const inRecord = new t_in()
         inRecord.setId(id)
         inRecord.setLicense(license)
@@ -47,7 +47,7 @@ export async function initDB() {
       const lines = data.result.toString().split('\n')
       for (const line of lines) {
         const [license, date, time] = line.split(' ')
-        id2 +=1
+        id2 += 1
         const outRecord = new t_out()
         outRecord.setId(id2)
         outRecord.setLicense(license)

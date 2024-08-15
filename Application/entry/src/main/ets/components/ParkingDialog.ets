@@ -7,7 +7,7 @@ import { t_parking } from '../model/t_parking'
 import { t_record } from '../model/t_record'
 import { t_license } from '../model/t_license'
 import Prompt from '@system.prompt'
-import {initDB} from '../functions/InitDB'
+import { initDB } from '../functions/InitDB'
 
 @CustomDialog
 export struct ParkingDialog {
@@ -16,7 +16,7 @@ export struct ParkingDialog {
   @Link licenseList: t_license[]
   @State parking: t_parking = new t_parking()
 
-  async aboutToAppear(){
+  async aboutToAppear() {
     initDB()
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
     for (let i = 0; i < this.licenseList.length; i++) {
@@ -36,7 +36,7 @@ export struct ParkingDialog {
     }
   }
 
-  build(){
+  build() {
     Column() {
       Text('记录详情')
         .fontSize(20)
@@ -47,9 +47,18 @@ export struct ParkingDialog {
       } else {
         Column() {
           Text(`车牌号: ${this.parking.getLicense()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
-          Text(`进入时间: ${dayjs(this.parking.getBeginTime()).format('YYYY-MM-DD HH:mm:ss')}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
-          Text(`离开时间: ${dayjs(this.parking.getEndTime()).format('YYYY-MM-DD HH:mm:ss')}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
-          Text(`停车时长（小时）: ${this.parking.getParkTime()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
+          Text(`进入时间: ${dayjs(this.parking.getBeginTime()).format('YYYY-MM-DD HH:mm:ss')}`)
+            .fontSize(16)
+            .margin({ top: 10 })
+            .textAlign(TextAlign.Start)
+          Text(`离开时间: ${dayjs(this.parking.getEndTime()).format('YYYY-MM-DD HH:mm:ss')}`)
+            .fontSize(16)
+            .margin({ top: 10 })
+            .textAlign(TextAlign.Start)
+          Text(`停车时长（小时）: ${this.parking.getParkTime()}`)
+            .fontSize(16)
+            .margin({ top: 10 })
+            .textAlign(TextAlign.Start)
           Text(`费用: ${this.parking.getFee()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
           Text(`停车场号: ${this.parking.getLot_id()}`).fontSize(16).margin({ top: 10 }).textAlign(TextAlign.Start)
         }.padding(20).width('80%')
@@ -57,7 +66,7 @@ export struct ParkingDialog {
         Text(`总金额: ${this.parking.getFee()} 元`)
           .fontSize(20)
           .fontWeight('bold')
-          .margin({top: 10})
+          .margin({ top: 10 })
         Row() {
           Button('取消').onClick(() => {
             this.controller.close()
@@ -87,7 +96,7 @@ export struct ParkingDialog {
             Prompt.showToast({ message: '支付成功' })
             this.controller.close()
           })
-        }.width('90%').justifyContent(FlexAlign.SpaceAround).margin({bottom: 10})
+        }.width('90%').justifyContent(FlexAlign.SpaceAround).margin({ bottom: 10 })
       }
     }
   }

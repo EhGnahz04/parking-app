@@ -1,5 +1,5 @@
-import cloud, {AuthUser} from '@hw-agconnect/cloud'
-import {Header} from '../components/CommonComponent'
+import cloud, { AuthUser } from '@hw-agconnect/cloud'
+import { Header } from '../components/CommonComponent'
 import hilog from '@ohos.hilog'
 import picker from '@ohos.file.picker'
 import router from '@ohos.router'
@@ -8,12 +8,11 @@ import Prompt from '@system.prompt'
 @Entry
 @Component
 struct UserInfo {
-
   @State photoUrl: string = ''
   @State displayName: string = ''
   @StorageLink('user') user: AuthUser = null
 
-  aboutToAppear(){
+  aboutToAppear() {
     this.photoUrl = this.user.getPhotoUrl()
     this.displayName = this.user.getDisplayName()
   }
@@ -22,9 +21,9 @@ struct UserInfo {
     Column() {
       Header({ title: '个人信息' })
 
-      Image(this.photoUrl?this.photoUrl:$r('app.media.logo')).width(70).height(70)
+      Image(this.photoUrl ? this.photoUrl : $r('app.media.logo')).width(70).height(70)
         .onClick(async () => {
-          try{
+          try {
             const options = new picker.PhotoSelectOptions()
             options.MIMEType = picker.PhotoViewMIMETypes.IMAGE_TYPE
             options.maxSelectNumber = 1
@@ -45,9 +44,9 @@ struct UserInfo {
 
         })
 
-      TextInput({placeholder: '请输入昵称', text: this.displayName}).width('80%').onChange((text) => {
+      TextInput({ placeholder: '请输入昵称', text: this.displayName }).width('80%').onChange((text) => {
         this.displayName = text
-      }).margin({top: 20, bottom: 20})
+      }).margin({ top: 20, bottom: 20 })
 
       Row() {
         Button('取消')
@@ -67,7 +66,7 @@ struct UserInfo {
               hilog.error(0, 'updateProfile', JSON.stringify(e))
             }
           })
-        }.padding(10).width('90%').justifyContent(FlexAlign.SpaceEvenly)
-      }
+      }.padding(10).width('90%').justifyContent(FlexAlign.SpaceEvenly)
     }
+  }
 }

@@ -17,7 +17,6 @@ struct AdminRecord {
   @State submitValue: string = ''
   @State record: t_record = new t_record()
   controller: SearchController = new SearchController()
-
   private dialogController: CustomDialogController = new CustomDialogController({
     builder: RecordDialog({ record: $record, isAdmin: true }),
     offset: { dx: 0, dy: -20 },
@@ -26,7 +25,10 @@ struct AdminRecord {
 
   async aboutToAppear() {
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
-    this.recordList = await this.database.collection(t_record).query().orderByAsc("id").get()
+    this.recordList = await this.database.collection(t_record)
+      .query()
+      .orderByAsc("id")
+      .get()
     this.showRecordList = this.recordList
   }
 
@@ -80,7 +82,7 @@ struct AdminRecord {
                 .width('95%')
                 .justifyContent(FlexAlign.Center)
                 .borderRadius(30)
-                .onClick(async() => {
+                .onClick(async () => {
                   this.record = cord
                   this.dialogController.open()
                 })

@@ -5,6 +5,7 @@ import { UserIndex } from '../components/UserIndex'
 @Component
 struct Index {
   @State currentIndex: number = 0
+
   @Builder TabBarBuilder(title: ResourceStr, image: ResourceStr, index: number) {
     Column({ space: 8 }) {
       Image(image)
@@ -28,7 +29,7 @@ struct Index {
       .tabBar(this.TabBarBuilder('停车缴费', $r('app.media.parking'), 0))
 
       TabContent() {
-          UserIndex()
+        UserIndex()
       }
       .tabBar(this.TabBarBuilder('用户中心', $r('app.media.user'), 1))
     }

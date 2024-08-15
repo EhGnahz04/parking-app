@@ -17,7 +17,6 @@ struct record {
   @State submitValue: string = ''
   @State record: t_record = new t_record()
   controller: SearchController = new SearchController()
-
   private dialogController: CustomDialogController = new CustomDialogController({
     builder: RecordDialog({ record: $record, isAdmin: false }),
     offset: { dx: 0, dy: -20 },
@@ -28,7 +27,11 @@ struct record {
     const user = await cloud.auth().getCurrentUser()
     const uid = user.getUid()
     this.database = cloud.database({ zoneName: 'Demo', objectTypeInfo: schema })
-    this.recordList = await this.database.collection(t_record).query().equalTo('u_id', uid).orderByAsc("id").get()
+    this.recordList = await this.database.collection(t_record)
+      .query()
+      .equalTo('u_id', uid)
+      .orderByAsc("id")
+      .get()
     this.showRecordList = this.recordList
   }
 
@@ -38,27 +41,27 @@ struct record {
         .margin({ top: 10 })
 
       Search({ value: this.changeValue, placeholder: 'Type to search...', controller: this.controller })
-      .searchButton('SEARCH')
-      .width('90%')
-      .height(40)
-      .backgroundColor('#F5F5F5')
-      .placeholderColor(Color.Grey)
-      .placeholderFont({ size: 14, weight: 400 })
-      .textFont({ size: 14, weight: 400 })
-      .onSubmit((value: string) => {
-        this.submitValue = value
-        if (value == '') {
-          this.showRecordList = this.recordList
-        } else {
-          this.showRecordList = this.recordList.filter((cord: t_record) => {
-            return cord.getLicense().includes(value)
-          })
-        }
-      })
-      .onChange((value: string) => {
-        this.changeValue = value
-      })
-      .margin(20)
+        .searchButton('SEARCH')
+        .width('90%')
+        .height(40)
+        .backgroundColor('#F5F5F5')
+        .placeholderColor(Color.Grey)
+        .placeholderFont({ size: 14, weight: 400 })
+        .textFont({ size: 14, weight: 400 })
+        .onSubmit((value: string) => {
+          this.submitValue = value
+          if (value == '') {
+            this.showRecordList = this.recordList
+          } else {
+            this.showRecordList = this.recordList.filter((cord: t_record) => {
+              return cord.getLicense().includes(value)
+            })
+          }
+        })
+        .onChange((value: string) => {
+          this.changeValue = value
+        })
+        .margin(20)
 
 
       List({ space: 10 }) {
@@ -79,9 +82,18 @@ struct record {
                     Text(cord.getFee().toString()).fontColor('#FF0000').width(30)
                     Text('未缴费').fontColor('#FF0000')
                   } else if (cord.getState() == 2) {
-                    Text(dayjs(cord.getTime()).format('YYYY-MM-DD HH:mm:ss')).width(170).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
-                    Text(cord.getLicense()).width(95).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
-                    Text(cord.getFee().toString()).width(30).fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
+                    Text(dayjs(cord.getTime()).format('YYYY-MM-DD HH:mm:ss'))
+                      .width(170)
+                      .fontColor('#CCC')
+                      .decoration({ type: TextDecorationType.LineThrough })
+                    Text(cord.getLicense())
+                      .width(95)
+                      .fontColor('#CCC')
+                      .decoration({ type: TextDecorationType.LineThrough })
+                    Text(cord.getFee().toString())
+                      .width(30)
+                      .fontColor('#CCC')
+                      .decoration({ type: TextDecorationType.LineThrough })
                     Text('已退款').fontColor('#CCC').decoration({ type: TextDecorationType.LineThrough })
                   }
                 }
